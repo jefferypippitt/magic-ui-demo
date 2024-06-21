@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -47,5 +46,15 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
+  }
+
+  html {
+    overflow-y: scroll; /* Always show the scrollbar */
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Inter, sans-serif;
   }
 }
