@@ -29,8 +29,8 @@ const Loading: React.FC = () => {
       <GaugeCircle
         max={100}
         min={0}
-        value={Math.min(Math.round(loadingPercent), 100)} // Ensure no decimals and cap at 100
-        gaugePrimaryColor="#00f"
+        value={Math.min(Math.round(loadingPercent), 100)} 
+        gaugePrimaryColor="#16a34a" // Updated color
         gaugeSecondaryColor="#ccc"
         className=""
       />

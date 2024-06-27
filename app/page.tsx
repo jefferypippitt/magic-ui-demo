@@ -1,8 +1,5 @@
-"use client";
-
 import IconCloud from "@/components/magicui/icon-cloud";
 import LetterPullup from "@/components/magicui/letter-pullup";
-
 
 const slugs = [
   "typescript",

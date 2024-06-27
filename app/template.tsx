@@ -15,7 +15,7 @@ export default function HomeTemplate({ children }: { children: React.ReactNode }
       const timer = setTimeout(() => {
         setIsLoading(false);
         sessionStorage.setItem('hasLoaded', 'true');
-      }, 4100); // Slightly longer than 3 seconds to ensure full display of 100%
+      }, 4100); 
 
       return () => clearTimeout(timer);
     }
