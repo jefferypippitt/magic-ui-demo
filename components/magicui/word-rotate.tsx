@@ -1,50 +1,49 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, MotionProps } from "motion/react";
-
-import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 interface WordRotateProps {
-  words: string[];
-  duration?: number;
-  framerProps?: MotionProps;
-  className?: string;
+  words: string[]
+  className?: string
+  delay?: number
 }
 
-export default function WordRotate({
+export function WordRotate({
   words,
-  duration = 2500,
-  framerProps = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-    transition: { duration: 0.3, ease: "easeInOut" },
-  },
   className,
+  delay = 2000
 }: WordRotateProps) {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0)
+  const [show, setShow] = useState(true)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, duration);
+    const intervalId = setInterval(() => {
+      setShow(false)
+      setTimeout(() => {
+        setIndex(prev => (prev + 1) % words.length)
+        setShow(true)
+      }, 200)
+    }, delay)
 
-    // Clean up interval on unmount
-    return () => clearInterval(interval);
-  }, [words, duration]);
+    return () => clearInterval(intervalId)
+  }, [delay, words.length])
 
   return (
-    <div className="relative flex h-full items-center justify-center">
-      <AnimatePresence mode="wait">
-        <motion.h1
-          key={words[index]}
-          className={cn("absolute text-center", className)}
-          {...framerProps}
-        >
-          {words[index]}
-        </motion.h1>
+    <span className='relative inline-flex'>
+      <AnimatePresence mode='wait'>
+        {show && (
+          <motion.span
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className={className}
+          >
+            {words[index]}
+          </motion.span>
+        )}
       </AnimatePresence>
-    </div>
-  );
+    </span>
+  )
 }
